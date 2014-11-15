@@ -1,46 +1,101 @@
 //
-//  AppDelegate.swift
+//  ImageDownloader.swift
 //  SwiftLazyTableImages
 //
 //  Created by Kyle Adams on 15/11/14.
 //  Copyright (c) 2014 Kyle Adams. All rights reserved.
 //
+//  Based on: LazyTableImages sample by Apple
+//  Copyright (C) 2014 Apple Inc.
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelegate {
 
     var window: UIWindow?
+    
+    // the http URL used for fetching the top iOS paid apps on the App Store
+    let FeedToParse = "http://www.nasa.gov/rss/dyn/image_of_the_day.rss"
+    
+    // the queue to run our "ParseOperation"
+    var queue: NSOperationQueue!
+    
+    // RSS feed network connection to the App Store
+    var parseFeedConnection: NSURLConnection!
+    var parseFeedData: NSMutableData!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let urlRequest = NSURLRequest(URL: NSURL(string: FeedToParse)!)
+        parseFeedConnection = NSURLConnection(request: urlRequest, delegate: self)
+        
         return true
     }
-
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    func handleError(error: NSError) {
+        let errorMessage = error.localizedDescription
+        var alertView = UIAlertView(title: "Cannot show feed",
+                                    message: errorMessage,
+                                    delegate: nil,
+                                    cancelButtonTitle: "OK")
+        
+        alertView.show()
     }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        parseFeedData = NSMutableData()
     }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        parseFeedData.appendData(data)
     }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        handleError(error)
+        parseFeedConnection = nil
     }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        parseFeedConnection = nil
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        queue = NSOperationQueue()
+        
+        var parser = ParseOperation(data: parseFeedData)
+        
+        parser.errorHandler = {(parseError: NSError) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.handleError(parseError)
+            })
+        }
+        
+        var weakParser = parser
+        
+        parser.completionBlock = { () -> Void in
+                // The root rootViewController is the only child of the navigation
+                // controller, which is the window's rootViewController.
+                if (weakParser.parsedFeedList != nil) {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        var navController: UINavigationController = self.window?.rootViewController as UINavigationController
+                        var viewController: ViewController = navController.topViewController as ViewController
+                        
+                        viewController.entries = weakParser.parsedFeedList!
+                        
+                        // tell our table view to reload its data, now that parsing has completed
+                        viewController.tableView.reloadData()
+                    })
+                }
+            // we are finished with the queue and our ParseOperation
+            self.queue = nil;
+        }
+        queue.addOperation(parser)
+        parseFeedData = nil
     }
-
 
 }
 

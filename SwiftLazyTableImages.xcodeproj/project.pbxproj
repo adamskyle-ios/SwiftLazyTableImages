@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		536AB87B1A17E1DF00B8D80E /* README.MD in Resources */ = {isa = PBXBuildFile; fileRef = 536AB87A1A17E1DF00B8D80E /* README.MD */; };
 		53990ABB1A1772CE00D24EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53990ABA1A1772CE00D24EF5 /* AppDelegate.swift */; };
 		53990ABD1A1772CE00D24EF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53990ABC1A1772CE00D24EF5 /* ViewController.swift */; };
 		53990AC01A1772CE00D24EF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53990ABE1A1772CE00D24EF5 /* Main.storyboard */; };
 		53990AC21A1772CE00D24EF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53990AC11A1772CE00D24EF5 /* Images.xcassets */; };
 		53990AC51A1772CE00D24EF5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53990AC31A1772CE00D24EF5 /* LaunchScreen.xib */; };
 		53990AD11A1772CF00D24EF5 /* SwiftLazyTableImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53990AD01A1772CF00D24EF5 /* SwiftLazyTableImagesTests.swift */; };
+		53990ADB1A17731B00D24EF5 /* ParsedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53990ADA1A17731B00D24EF5 /* ParsedRecord.swift */; };
+		53990ADD1A1773CF00D24EF5 /* ParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53990ADC1A1773CF00D24EF5 /* ParseOperation.swift */; };
+		53D674F31A179A880089F13C /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D674F21A179A880089F13C /* ImageDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		536AB87A1A17E1DF00B8D80E /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 		53990AB51A1772CE00D24EF5 /* SwiftLazyTableImages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLazyTableImages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53990AB91A1772CE00D24EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53990ABA1A1772CE00D24EF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +41,9 @@
 		53990ACA1A1772CF00D24EF5 /* SwiftLazyTableImagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLazyTableImagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53990ACF1A1772CF00D24EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53990AD01A1772CF00D24EF5 /* SwiftLazyTableImagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLazyTableImagesTests.swift; sourceTree = "<group>"; };
+		53990ADA1A17731B00D24EF5 /* ParsedRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedRecord.swift; sourceTree = "<group>"; };
+		53990ADC1A1773CF00D24EF5 /* ParseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOperation.swift; sourceTree = "<group>"; };
+		53D674F21A179A880089F13C /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,7 @@
 		53990AAC1A1772CE00D24EF5 = {
 			isa = PBXGroup;
 			children = (
+				536AB87A1A17E1DF00B8D80E /* README.MD */,
 				53990AB71A1772CE00D24EF5 /* SwiftLazyTableImages */,
 				53990ACD1A1772CF00D24EF5 /* SwiftLazyTableImagesTests */,
 				53990AB61A1772CE00D24EF5 /* Products */,
@@ -78,7 +87,10 @@
 			isa = PBXGroup;
 			children = (
 				53990ABA1A1772CE00D24EF5 /* AppDelegate.swift */,
+				53990ADA1A17731B00D24EF5 /* ParsedRecord.swift */,
+				53990ADC1A1773CF00D24EF5 /* ParseOperation.swift */,
 				53990ABC1A1772CE00D24EF5 /* ViewController.swift */,
+				53D674F21A179A880089F13C /* ImageDownloader.swift */,
 				53990ABE1A1772CE00D24EF5 /* Main.storyboard */,
 				53990AC11A1772CE00D24EF5 /* Images.xcassets */,
 				53990AC31A1772CE00D24EF5 /* LaunchScreen.xib */,
@@ -194,6 +206,7 @@
 			files = (
 				53990AC01A1772CE00D24EF5 /* Main.storyboard in Resources */,
 				53990AC51A1772CE00D24EF5 /* LaunchScreen.xib in Resources */,
+				536AB87B1A17E1DF00B8D80E /* README.MD in Resources */,
 				53990AC21A1772CE00D24EF5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,7 +226,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				53990ABD1A1772CE00D24EF5 /* ViewController.swift in Sources */,
+				53D674F31A179A880089F13C /* ImageDownloader.swift in Sources */,
 				53990ABB1A1772CE00D24EF5 /* AppDelegate.swift in Sources */,
+				53990ADB1A17731B00D24EF5 /* ParsedRecord.swift in Sources */,
+				53990ADD1A1773CF00D24EF5 /* ParseOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +421,7 @@
 				53990AD61A1772CF00D24EF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		53990AD71A1772CF00D24EF5 /* Build configuration list for PBXNativeTarget "SwiftLazyTableImagesTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +430,7 @@
 				53990AD91A1772CF00D24EF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
